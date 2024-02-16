@@ -1,6 +1,7 @@
 <?php
-include '../db_connection.php';
-function addProduct($category, $name, $price, $description, $image) {
+include('DB\db_connection.php');
+function addProduct($category, $name, $price, $description, $image)
+{
     $conn = ConnectDB();
 
     $sql = "INSERT INTO products (category, name, price, description, image) VALUES ('$category', '$name', $price, '$description', '$image')";
@@ -12,7 +13,8 @@ function addProduct($category, $name, $price, $description, $image) {
     }
 }
 
-function updateProduct($id, $category, $name, $price, $description, $image) {
+function updateProduct($id, $category, $name, $price, $description, $image)
+{
     $conn = ConnectDB();
 
     $sql = "UPDATE products SET category='$category', name='$name', price=$price, description='$description', image='$image' WHERE id=$id";
@@ -24,7 +26,8 @@ function updateProduct($id, $category, $name, $price, $description, $image) {
     }
 }
 
-function getProductsByCategory($category) {
+function getProductsByCategory($category)
+{
     $conn = ConnectDB();
 
     $sql = "SELECT * FROM products WHERE category='$category'";
@@ -42,4 +45,4 @@ function getProductsByCategory($category) {
 }
 $conn = ConnectDB();
 $conn->close();
-?>
+

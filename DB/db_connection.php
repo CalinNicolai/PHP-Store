@@ -13,4 +13,4 @@ function ConnectDB(){
     }
     return $connect;
 }
-?>
+
