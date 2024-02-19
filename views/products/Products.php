@@ -1,45 +1,4 @@
-<?php
-// Подключение к базе данных
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "Istore";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Проверка соединения
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Функция для получения товаров по категории или всех товаров
-function getProducts($conn, $category = null)
-{
-    $query = "SELECT * FROM products";
-
-    // Если указана категория, добавляем условие WHERE
-    if ($category !== null) {
-        $query .= " WHERE category = '$category'";
-    }
-
-    $result = $conn->query($query);
-
-    if ($result->num_rows > 0) {
-        return $result->fetch_all(MYSQLI_ASSOC);
-    } else {
-        return [];
-    }
-}
-
-// Определение текущей категории
-$category = $_GET['category'] ?? null;
-
-// Получение товаров для текущей категории или всех товаров
-$products = getProducts($conn, $category);
-
-// Закрытие соединения
-$conn->close();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,23 +8,20 @@ $conn->close();
     <meta name="author" content=""/>
     <title>Shop Homepage - Start Bootstrap Template</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="public/assets/favicon.ico"/>
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet"/>
+    <link href="public/CSS/main.css" rel="stylesheet"/>
 </head>
 <body>
-<?php
-echo phpversion();
-?>
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="#!">Start Bootstrap</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
-                    class="navbar-toggler-icon"></span></button>
+                class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>

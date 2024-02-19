@@ -1,18 +1,17 @@
 <?php
+require 'config.php';
+
 function createDatabaseAndTable() {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $db = "Istore";
-    $conn = new mysqli($servername, $username, $password);
+    global $DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME;
+
+    $conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
-        echo "Nope";
     }
 
     // Создаем базу данных
-    $sql = "CREATE DATABASE IF NOT EXISTS {$db}";
+    $sql = "CREATE DATABASE IF NOT EXISTS {$DB_NAME}";
     if ($conn->query($sql) === TRUE) {
         echo "Database created successfully or already exists";
     } else {
@@ -20,7 +19,7 @@ function createDatabaseAndTable() {
     }
 
     // Подключаемся к созданной/существующей базе данных
-    $conn->select_db($db);
+    $conn->select_db($DB_NAME);
 
     // Создаем таблицу для продуктов
     $sql = "CREATE TABLE IF NOT EXISTS products (
@@ -42,4 +41,5 @@ function createDatabaseAndTable() {
 }
 
 // Вызываем функцию для создания базы данных и таблицы
-?>
+createDatabaseAndTable();
+
