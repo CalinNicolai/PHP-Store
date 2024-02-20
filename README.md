@@ -21,5 +21,5 @@ The theme of this project is a generic online store, featuring various categorie
 
 This project was created by Calin Nicolai and Iusiumbeli Aliona. 
 For any questions or inquiries, please contact us at:
-- [kalinnikolay02@gmail.com](mailto:email@example.com).
+- [kalinnikolay02@gmail.com](mailto:kalinnikolay02@gmail.com).
 

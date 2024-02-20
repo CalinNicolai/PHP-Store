@@ -15,7 +15,7 @@
 <div class="container mt-4">
 
     <h2>Add Product</h2>
-    <form method="post" action="admin/panel">
+    <form method="post" action="index.php?page=admin/panel">
         <div class="form-group">
             <input type="hidden" name="action" value="add_product">
             <label for="category">Category:</label>
@@ -49,39 +49,6 @@
 
     <hr>
 
-    <h2>Update Product</h2>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <div class="form-group">
-            <label for="id">Product ID:</label>
-            <input type="number" class="form-control" name="id" required>
-        </div>
-        <div class="form-group">
-            <label for="category">Category:</label>
-            <select class="form-control" name="category">
-                <?php foreach ($categories as $cat) {
-                    echo "<option value='$cat'>$cat</option>";
-                } ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="price">Price:</label>
-            <input type="number" class="form-control" name="price" required>
-        </div>
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea class="form-control" name="description" rows="3" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="image">Image URL:</label>
-            <input type="text" class="form-control" name="image" required>
-        </div>
-        <button type="submit" class="btn btn-primary" name="update_product">Update Product</button>
-    </form>
-
     <hr>
 
     <h2>Products</h2>
@@ -102,7 +69,7 @@
             echo "<td>{$product['name']}</td>";
             echo "<td>{$product['price']}</td>";
             echo "<td>{$product['description']}</td>";
-            echo "<td><button class='btn btn-primary edit-product' data-id='{$product['id']}'>Edit</button></td>";
+            echo "<td><button class='btn btn-primary edit-product' data-id='{$product['id']}' onclick='openEditModal({$product['id']})'>Edit</button></td>";
             echo "</tr>";
         }
         ?>
@@ -127,8 +94,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="editProductForm" >
-                    <input type="hidden" name="id" id="editProductId">
+                <form id="editProductForm" action="index.php?page=admin/panel" method="post">
+                    <input type="hidden" name="action" value="update_product">
+                    <input type="hidden" name="id" id="editProductId" value="<?php ?>">
                     <div class="form-group">
                         <label for="editCategory">Category:</label>
                         <input type="text" class="form-control" id="editCategory" name="category" required>

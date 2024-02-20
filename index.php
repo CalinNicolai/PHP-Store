@@ -31,8 +31,10 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                 $action = $_POST['action'] ?? '';
                 $product = new \pages\Product($conn, $_GET, $_POST);
                 if ($action === 'add_product') {
+                    echo "adding";
                     $product->addProduct($_POST);
                 } elseif ($action === 'update_product') {
+                    echo "editing";
                     // Логика обновления продукта
                     $product->updateProduct($_POST);
                 }
