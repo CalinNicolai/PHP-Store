@@ -15,7 +15,7 @@
 <div class="container mt-4">
 
     <h2>Add Product</h2>
-    <form method="post" action="index.php?page=admin/panel">
+    <form method="post" action="admin/panel">
         <div class="form-group">
             <input type="hidden" name="action" value="add_product">
             <label for="category">Category:</label>

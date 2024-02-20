@@ -41,5 +41,4 @@ function createDatabaseAndTable() {
 }
 
 // Вызываем функцию для создания базы данных и таблицы
-createDatabaseAndTable();
 
