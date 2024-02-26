@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin Panel</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="styles.css"/>
+    <link type="text/css" rel="stylesheet" href="public/CSS/admin.css"/>
 </head>
 
 <body>
@@ -70,12 +69,18 @@
             echo "<td>{$product['price']}</td>";
             echo "<td>{$product['description']}</td>";
             echo "<td><button class='btn btn-primary edit-product' data-id='{$product['id']}' onclick='openEditModal({$product['id']})'>Edit</button></td>";
-            echo "</tr>";
+            echo "<td>
+                    <form id='deleteProductForm' action='index.php?page=admin/panel' method='POST'>
+                    <input type='hidden' name='action' value='delete_product'>
+                    <input type='hidden' name='ID' id='ID' value='{$product['id']}'>
+                    <button type='submit' class='btn btn-danger' id='deleteProductBtn'>Delete Product</button>
+                </form>
+                </td>
+                </tr>
+            ";
+
         }
         ?>
-
-
-
 
 
         </tbody>
@@ -96,7 +101,7 @@
             <div class="modal-body">
                 <form id="editProductForm" action="index.php?page=admin/panel" method="post">
                     <input type="hidden" name="action" value="update_product">
-                    <input type="hidden" name="id" id="editProductId" value="<?php ?>">
+                    <input type="hidden" name="id" id="editProductId" value="">
                     <div class="form-group">
                         <label for="editCategory">Category:</label>
                         <input type="text" class="form-control" id="editCategory" name="category" required>
@@ -111,11 +116,9 @@
                     </div>
                     <div class="form-group">
                         <label for="editDescription">Description:</label>
-                        <textarea class="form-control" id="editDescription" name="description" rows="3"
-                                  required></textarea>
+                        <textarea class="form-control" id="editDescription" name="description" rows="3" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" id="updateProductBtn">Update Product</button>
-                    <button type="button" class="btn btn-danger" id="deleteProductBtn">Delete Product</button>
                 </form>
             </div>
         </div>

@@ -21,6 +21,14 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                 $admin = new \pages\Admin($conn, $_GET, $_POST);
                 $admin->products($product);
                 break;
+            case 'login':
+                $user = new \pages\User($conn,$_GET,$_POST);
+                $user->printLoginHtml();
+                break;
+            case 'registration':
+                $user = new \pages\User($conn,$_GET,$_POST);
+                $user->printRegistrationHtml();
+                break;
             default:
                 include '404/404.php';
         };
@@ -33,10 +41,24 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                 if ($action === 'add_product') {
                     echo "adding";
                     $product->addProduct($_POST);
+                    header("Location: /");
+                    exit; // Важно завершить выполнение скрипта после редиректа
                 } elseif ($action === 'update_product') {
                     echo "editing";
-                    // Логика обновления продукта
                     $product->updateProduct($_POST);
+                    header("Location: /");
+                    exit;
+                } elseif ($action === 'delete_product') {
+                    // Логика удаления продукта
+                    $productId = $_POST['ID'] ?? null;
+                    if ($productId) {
+                        $product->deleteProduct($productId);
+                        echo "Product deleted   ";
+                    } else {
+                        echo "Product ID not provided";
+                    }
+                    header("Location: /");
+                    exit;
                 }
                 break;
         }
