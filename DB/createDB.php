@@ -2,7 +2,6 @@
 require 'config.php';
 
 function createDatabaseAndTable() {
-
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
 
     if ($conn->connect_error) {
@@ -31,9 +30,22 @@ function createDatabaseAndTable() {
     )";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Table created successfully or already exists";
+        echo "Table 'products' created successfully or already exists";
     } else {
-        echo "Error creating table: " . $conn->error;
+        echo "Error creating table 'products': " . $conn->error;
+    }
+
+    // Создаем таблицу для пользователей
+    $sql = "CREATE TABLE IF NOT EXISTS users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        email VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL
+    )";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Table 'users' created successfully or already exists";
+    } else {
+        echo "Error creating table 'users': " . $conn->error;
     }
 
     $conn->close();

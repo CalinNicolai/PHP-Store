@@ -1,11 +1,12 @@
 <?php
 
+session_start();
 
 $page = $_GET['page'] ?? 'index';
 include(__DIR__ . '/DB/db_connection.php');
 $conn = ConnectDB();
 
-foreach (glob(__DIR__ . "/pages/*.php") as $filename) {
+foreach (glob(__DIR__ . "/controllers/*.php") as $filename) {
     include $filename;
 }
 
@@ -13,20 +14,20 @@ switch ($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
         switch ($page) {
             case 'index':
-                $product = new \pages\Product($conn, $_GET, $_POST);
+                $product = new \controllers\Product($conn, $_GET, $_POST);
                 $product->printHtml();
                 break;
             case 'admin/panel':
-                $product = new \pages\Product($conn, $_GET, $_POST);
-                $admin = new \pages\Admin($conn, $_GET, $_POST);
+                $product = new \controllers\Product($conn, $_GET, $_POST);
+                $admin = new \controllers\Admin($conn, $_GET, $_POST);
                 $admin->products($product);
                 break;
             case 'login':
-                $user = new \pages\User($conn,$_GET,$_POST);
+                $user = new \controllers\User($conn, $_GET, $_POST);
                 $user->printLoginHtml();
                 break;
             case 'registration':
-                $user = new \pages\User($conn,$_GET,$_POST);
+                $user = new \controllers\User($conn, $_GET, $_POST);
                 $user->printRegistrationHtml();
                 break;
             default:
@@ -37,7 +38,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         switch ($page) {
             case 'admin/panel':
                 $action = $_POST['action'] ?? '';
-                $product = new \pages\Product($conn, $_GET, $_POST);
+                $product = new \controllers\Product($conn, $_GET, $_POST);
                 if ($action === 'add_product') {
                     echo "adding";
                     $product->addProduct($_POST);
@@ -61,6 +62,30 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                     exit;
                 }
                 break;
+            case 'login':
+                $action = $_POST['action'] ?? '';
+                $user = new \controllers\User($conn, $_GET, $_POST);
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                echo "logging in";
+                $user->login($email, $password);
+                break;
+            case 'register':
+                $action = $_POST['action'] ?? '';
+                $user = new \controllers\User($conn, $_GET, $_POST);
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                echo "registering";
+                $user->register($email, $password);
+                break;
+            case 'logout':
+                $action = $_POST['action']?? '';
+                $user = new \controllers\User($conn, $_GET, $_POST);
+                echo "logging out";
+                $user->login();
+                break;
+            default:
+
         }
 
         break;

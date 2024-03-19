@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,8 +39,12 @@
                     </ul>
                 </li>
             </ul>
-            <?php if (!isset($_SESSION['user'])): ?>
+            <?php if (!isset($_SESSION['userEmail'])): ?>
                 <a class="btn btn-outline-dark" href="/login">Login</a>
+            <?php else: ?>
+                <form class="d-flex">
+                    <a class="btn btn-outline-dark" href="/logout">Logout</a>
+                </form>
             <?php endif; ?>
             <form class="d-flex">
                 <button class="btn btn-outline-dark" type="submit">
@@ -51,6 +55,11 @@
             </form>
         </div>
     </div>
+    <?php
+    if (isset($_SESSION['userEmail'])) {
+        echo '<span class="text-dark">Привет, ' . $_SESSION['userEmail'] . '</span>';
+    }
+    ?>
 </nav>
 <!-- Header-->
 <header class="bg-dark py-5">
@@ -62,6 +71,9 @@
     </div>
 </header>
 <!-- Section-->
+<h1>
+</h1>
+
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -80,7 +92,7 @@
                                 <!-- Product name-->
                                 <h5 class="fw-bolder"><?= $product['name'] ?></h5>
                                 <!-- Product price-->
-                                <span ><?= $product['price'] ?></span>
+                                <span><?= $product['price'] ?></span>
                             </div>
                         </div>
                         <!-- Product actions-->
@@ -102,5 +114,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
+<script>
+    console.log(<?php echo json_encode($user) ?>);
+    console.log(<?php echo json_encode($_SESSION['user']) ?>);
+</script>
 </body>
 </html>

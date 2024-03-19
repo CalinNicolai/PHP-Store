@@ -1,6 +1,6 @@
 <?php
 
-namespace pages;
+namespace controllers;
 
 class Admin
 {

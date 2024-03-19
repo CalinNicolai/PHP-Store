@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,15 +13,15 @@
     <input type="checkbox" id="check">
     <div class="login form">
         <header>Signup</header>
-        <form action="#">
-            <input type="text" placeholder="Enter your email">
-            <input type="password" placeholder="Create a password">
-            <input type="password" placeholder="Confirm your password">
-            <input type="button" class="button" value="Signup">
+        <form method="post" action="index.php?page=register">
+            <input name="email" type="text" placeholder="Enter your email">
+            <input name="password" type="password" placeholder="Create a password">
+            <input name="confirm_password" type="password" placeholder="Confirm your password">
+            <input type="submit" class="button" value="Signup">
         </form>
         <div class="signup">
         <span class="signup">Already have an account?
-         <label for="check">Login</label>
+         <a href="/login">Login</a>
         </span>
         </div>
     </div>

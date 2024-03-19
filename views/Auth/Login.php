@@ -13,11 +13,11 @@
     <input type="checkbox" id="check">
     <div class="login form">
         <header>Login</header>
-        <form action="#">
-            <input type="text" placeholder="Enter your email">
-            <input type="password" placeholder="Enter your password">
+        <form method="post" action="index.php?page=login">
+            <input name="email" type="text" placeholder="Enter your email">
+            <input name="password" type="password" placeholder="Enter your password">
             <a href="#">Forgot password?</a>
-            <input type="button" class="button" value="Login">
+            <input type="submit" class="button" value="Login">
         </form>
         <div class="signup">
             <span class="signup">Don't have an account?
