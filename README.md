@@ -25,14 +25,21 @@
     ```bash
     php artisan migrate
     ```
-8. Запустите проект командами
+8. Установите зависимости
+   ```bash
+   composer install
+   ```
+   ```bash
+   npm isntall
+   ```
+9. Запустите проект командами
     ```bash
     php artisan serve
     ```
     ```bash
     npm run dev
     ```
-9. Для добавления первичных записей в базу данных можно использовать команды
+10. Для добавления первичных записей в базу данных можно использовать команды
     ```bash
     php artisan db:seed --class=RoleSeeder
     php artisan db:seed --class=UserSeeder
